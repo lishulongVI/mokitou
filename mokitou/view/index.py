@@ -11,7 +11,7 @@ class IndexHandler(RequestHandler):
         pass
 
     def get(self, *args, **kwargs):
-        self.write(u'这是index 页面<link rel="stylesheet" href="/static/index.js">')
+        self.write(u'这是index 页面<link rel="stylesheet" href="/statics/index.js">')
         url = self.reverse_url('info')
         print(url)
         self.write("<a href='{}'> another page info about user</a>".format(url))
@@ -66,3 +66,94 @@ class VideoHandler(RequestHandler):
 
     def get(self, u1, u2, *args, **kwargs):
         self.write('video u1:{} u2:{}'.format(u1, u2))
+
+
+class VideoHandler1(RequestHandler):
+    def data_received(self, chunk):
+        pass
+
+    def get(self, pid, cid, *args, **kwargs):
+        self.write('video u1:{} u2:{}'.format(pid, cid))
+
+
+class RegisterHandler(RequestHandler):
+    def data_received(self, chunk):
+        pass
+
+    def get(self, *args, **kwargs):
+        pass
+
+
+class LishulongHandler(RequestHandler):
+    def data_received(self, chunk):
+        pass
+
+    def get(self, *args, **kwargs):
+        pid = self.get_query_argument('pid')
+        cid = self.get_query_argument('cid')
+        self.write('video u1:{} u2:{}'.format(pid, cid))
+
+
+class ProfileHandler(RequestHandler):
+    def data_received(self, chunk):
+        pass
+
+    def get(self, *args, **kwargs):
+        self.render('../templates/profile.html')
+
+    def post(self, *args, **kwargs):
+        userName = self.get_body_argument('userName')
+        password = self.get_body_argument('password')
+        hobbyes = self.get_body_arguments('hobby')
+
+        self.write(dict(userName=userName, password=password, hobbyes=hobbyes))
+
+
+from mokitou.config.config import base_path
+import os
+
+
+class FileHandler(RequestHandler):
+    def data_received(self, chunk):
+        pass
+
+    def get(self, *args, **kwargs):
+        self.render('../templates/file.html')
+
+    def post(self, *args, **kwargs):
+        """
+            self.request.files = {
+                'file': [
+                    {
+                        "filename": 'name',
+                        "body": 'body',
+                        "content_type": 'content_type',
+                    }
+                ],
+
+                'imge': [
+                    {
+                        {
+                            "filename": 'name',
+                            "body": 'body',
+                            "content_type": 'content_type',
+                        }
+                    }
+                ]
+            }
+        :param args:
+        :param kwargs:
+        :return:
+        """
+        # filename
+        #
+        files = self.request.files
+        for f in files:
+            for b in files.get(f):
+                fp = os.path.join(base_path, 'upfile/{}'.format(b.filename))
+                with open(fp, 'wb') as b_f:
+                    b_f.write(b.body)
+        pass
+
+
+
