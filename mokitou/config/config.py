@@ -15,11 +15,11 @@ options = {
 setting = {
     # 生产模式下 修改为false，当文件发生修改后可以自动重启
     """
-    取消缓存编译的模板
-    取消缓存静态文件的hash值
-    提供追踪信息
+    取消缓存编译的模板 complain_template_cache=False
+    取消缓存静态文件的hash值 static_hash_cache=False
+    提供追踪信息server_traceback=True
     """
-    "debug": True,
+    # "debug": True,
     'static_path': os.path.join(base_path, 'static'),
     'template_path': os.path.join(base_path, 'template'),
     'autoreload': True,
