@@ -5,22 +5,27 @@
 """
 import os
 
-base_path = os.path.dirname(os.getcwd())
+base_path = os.path.dirname(os.path.dirname(__file__))
+# base_path = os.path.dirname(os.getcwd())
+
+# print(base_path)
 
 options = {
     'port': 9000,
     'address': '0.0.0.0'
 }
 
-setting = {
-    # 生产模式下 修改为false，当文件发生修改后可以自动重启
-    """
-    取消缓存编译的模板 complain_template_cache=False
-    取消缓存静态文件的hash值 static_hash_cache=False
-    提供追踪信息server_traceback=True
-    """
-    # "debug": True,
-    'static_path': os.path.join(base_path, 'static'),
-    'template_path': os.path.join(base_path, 'template'),
-    'autoreload': True,
+"""
+   取消缓存编译的模板 complain_template_cache=False
+   取消缓存静态文件的hash值 static_hash_cache=False
+   提供追踪信息server_traceback=True
+"""
+# 'autoreload': True,
+
+settings = {
+    "debug": True,  # 生产模式下 修改为false，当文件发生修改后可以自动重启
+    'static_path': os.path.join(base_path, 'statics'),
+    'template_path': os.path.join(base_path, 'templates'),
 }
+
+print(settings)
