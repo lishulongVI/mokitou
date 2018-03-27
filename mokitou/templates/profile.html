@@ -3,9 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>regist</title>
-    <link style="">
+    <!--
+        http://localhost:9000/static/css/index.css?v=2534a0da474af404f1b15a9be01c6b26
+
+
+
+
+    -->
+    <link rel="stylesheet" href="{{static_url('css/index.css')}}">
 </head>
-<body align="center">
+<body align="center" class="cl">
 <form action="/profile" method="post">
     userName:<input type="text" name="userName">
     <hr/>
@@ -28,6 +35,9 @@
     {% else %}
     <h1> this is else </h1>
     {% end %}
+
+    <!--函数传递-->
+    {{p(1,2)}}
 
 </form>
 

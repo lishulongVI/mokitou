@@ -21,11 +21,13 @@ options = {
    提供追踪信息server_traceback=True
 """
 # 'autoreload': True,
+# 'autoescape': None, 关闭当前项目中的自动转义 自动转义是为了安全考虑 不建议此种方式实现 自动转义
 
 settings = {
     "debug": True,  # 生产模式下 修改为false，当文件发生修改后可以自动重启
     'static_path': os.path.join(base_path, 'statics'),
     'template_path': os.path.join(base_path, 'templates'),
+
 }
 
 # print(settings)

@@ -107,7 +107,10 @@ class ProfileHandler(RequestHandler):
         pass
 
     def get(self, *args, **kwargs):
-        self.render('../templates/profile.html', args=dict(name='lishulong', password='passwd'))
+        def p(a, b):
+            return '{}-{}'.format(a, b)
+
+        self.render('../templates/profile.html', args=dict(name='lishulong', password='passwd'), p=p)
 
     def post(self, *args, **kwargs):
         userName = self.get_body_argument('userName')
@@ -210,3 +213,16 @@ class ERRORHandler(RequestHandler):
 
     def on_finish(self):
         pass
+
+
+class TranceHandler(RequestHandler):
+    """
+    自动转义，防止恶意提交
+    关闭自动转义
+    """
+    def data_received(self, chunk):
+        pass
+
+    def get(self, *args, **kwargs):
+        s = '<h1>hello word</h1>'
+        self.render('../templates/index.html', index=s)

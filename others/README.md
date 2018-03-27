@@ -10,3 +10,6 @@
 3. put 从客户端想服务器传送指定内容
 4. patch 请求修改局部内容
 5. options 返回url支持的所有HTTP方法
+
+
+#### tornado 默认开启了转义

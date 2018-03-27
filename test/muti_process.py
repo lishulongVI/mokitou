@@ -6,5 +6,32 @@
 
 import multiprocessing
 
-
 print(multiprocessing.cpu_count())
+
+
+class Test(object):
+    """
+    一个星（*）：表示接收的参数作为元组来处理
+
+    两个星（**）：表示接收的参数作为字典来处理
+    """
+
+    def get_dict(self, **dicts):
+        for i in dicts:
+            print(i)
+
+    def get_tuple(self, *t):
+        print(t)
+
+
+if __name__ == '__main__':
+    t = (1, 2, 3)
+
+    print(Test().get_tuple(*t))
+
+    d = {
+        'name': 'name',
+        'age': 12,
+    }
+
+    print(Test().get_dict(**d))

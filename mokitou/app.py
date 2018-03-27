@@ -22,6 +22,7 @@ class APP(Application):
             (r'/video/lishulong', index.LishulongHandler),  # http://localhost:9000/video/lishulong?pid=葛优&cid=上一个当
             (r'/profile', index.ProfileHandler),
             (r'/file', index.FileHandler),
+            (r'/trans', index.TranceHandler),
         ]
-        super().__init__(handlers=handlers, settings=config.settings)
-        # super().__init__(handlers, **config.setting)
+        # super().__init__(handlers=handlers, settings=config.settings)
+        super().__init__(handlers, **config.settings)
