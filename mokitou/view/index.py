@@ -98,8 +98,16 @@ class ProfileHandler(RequestHandler):
     def data_received(self, chunk):
         pass
 
+    def prepare(self):
+        """
+        预处理方法，在执行对应的请求方法之前调用
+        任何一种http请求都会执行prepare方法
+        :return:
+        """
+        pass
+
     def get(self, *args, **kwargs):
-        self.render('../templates/profile.html')
+        self.render('../templates/profile.html', args=dict(name='lishulong', password='passwd'))
 
     def post(self, *args, **kwargs):
         userName = self.get_body_argument('userName')
@@ -156,4 +164,49 @@ class FileHandler(RequestHandler):
         pass
 
 
+class DealHandler(RequestHandler):
+    """
+    正常处理流程
+    """
 
+    def set_default_headers(self):
+        pass
+
+    def initialize(self):
+        pass
+
+    def prepare(self):
+        pass
+
+    def get(self, *args, **kwargs):
+        pass
+
+    def on_finish(self):
+        pass
+
+
+class ERRORHandler(RequestHandler):
+    """
+    异常处理流程
+    """
+
+    def set_default_headers(self):
+        pass
+
+    def initialize(self):
+        pass
+
+    def prepare(self):
+        pass
+
+    def get(self, *args, **kwargs):
+        pass
+
+    def set_default_headers(self):
+        pass
+
+    def write_error(self, status_code, **kwargs):
+        pass
+
+    def on_finish(self):
+        pass

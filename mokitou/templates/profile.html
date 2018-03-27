@@ -19,6 +19,16 @@
     <hr/>
     <input type="submit" value="注册">
 
+    <h1>{{args}}</h1>
+    <h2>用户名：{{args.get('name')}}</h2>
+    <h2>密码：{{args.get('password')}}</h2>
+
+    {% if args['name'] == 'lishulong'%}
+    <h1> this is if </h1>
+    {% else %}
+    <h1> this is else </h1>
+    {% end %}
+
 </form>
 
 </body>

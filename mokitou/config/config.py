@@ -28,4 +28,4 @@ settings = {
     'template_path': os.path.join(base_path, 'templates'),
 }
 
-print(settings)
+# print(settings)
