@@ -3,12 +3,14 @@
 @contact: lishulong.never@gmail.com
 @time: 2018/3/25 上午11:05
 """
+
+from logging import config
 from tornado import httpserver
 from tornado import ioloop
 from mokitou.app import APP
-from logging import config
-import yaml
 from mokitou.config.config import options
+
+import yaml
 
 if __name__ == '__main__':
     # 配置日志

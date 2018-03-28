@@ -7,11 +7,14 @@
 <body>
 
 
-{{index}}
+
 <!--关闭当前文档的自动转义-->
 {% autoescape None%}
-
 {{index}}
+<!--进行转义-->
+{{escape(index)}}
+{{index}}
+
 <!--trans close raw-->
 {% raw index %}
 

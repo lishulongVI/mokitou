@@ -5,6 +5,7 @@
 """
 
 import multiprocessing
+import random
 
 print(multiprocessing.cpu_count())
 
@@ -17,6 +18,7 @@ class Test(object):
     """
 
     def get_dict(self, **dicts):
+        """"""
         for i in dicts:
             print(i)
 
@@ -35,3 +37,7 @@ if __name__ == '__main__':
     }
 
     print(Test().get_dict(**d))
+
+    print(random.randint(20000, 30000))
+    print(random.randint(20000, 30000))
+    print(random.randint(20000, 30000))
