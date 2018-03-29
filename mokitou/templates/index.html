@@ -7,7 +7,6 @@
 <body>
 
 
-
 <!--关闭当前文档的自动转义-->
 {% autoescape None%}
 {{index}}
@@ -19,6 +18,8 @@
 {% raw index %}
 
 <!--在配置里修改-->
+
+<h1>访问次数：{{count}}</h1>
 
 </body>
 </html>

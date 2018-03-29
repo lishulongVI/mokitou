@@ -27,6 +27,7 @@ settings = {
     "debug": True,  # 生产模式下 修改为false，当文件发生修改后可以自动重启
     'static_path': os.path.join(base_path, 'statics'),
     'template_path': os.path.join(base_path, 'templates'),
+    'cookie_secret': "8mjgC0XMTPmu1LxUhp9uH4b/qcoQ40x2kz5T9Tcop6Q=",
 
 }
 

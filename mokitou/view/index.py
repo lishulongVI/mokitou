@@ -6,6 +6,7 @@
 import json
 from tornado.web import RequestHandler
 
+
 from mokitou.dao.orm.ArticleDao import Article
 from mokitou.utils.json_util import JsonEncoder
 
@@ -229,8 +230,11 @@ class TranceHandler(RequestHandler):
         pass
 
     def get(self, *args, **kwargs):
+        count = int(self.get_cookie('count', 0))
+        count += 1
+        self.set_cookie('count', str(count))
         s = '<h1>hello word</h1>'
-        self.render('../templates/index.html', index=s)
+        self.render('../templates/index.html', index=s, count=count)
 
 
 class ArticleHandler(RequestHandler):
@@ -241,6 +245,8 @@ class ArticleHandler(RequestHandler):
         self.set_header('Content-type', 'application/json')
 
     def get(self, *args, **kwargs):
+        self.set_cookie("whisky1", 'beer')
+        self.set_secure_cookie("whisky2", 'beer')
         sql = 'select * from article'
         res = self.application.db.get_all(sql=sql)
         print(res)
@@ -255,5 +261,7 @@ class ArticleHandler(RequestHandler):
         self.write(dict(result=res))
 
     def patch(self, *args, **kwargs):
+        whisky1 = self.get_cookie('whisky2')
+        whisky2 = self.get_secure_cookie('whisky2').decode('utf-8')
         article = Article('llll', 'content')
-        self.write(dict(result=article.save_obj()))
+        self.write(dict(result=article.save_obj(), cookie=whisky2, cookie1=whisky1))
