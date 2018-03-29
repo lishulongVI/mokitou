@@ -3,7 +3,10 @@
 @contact: lishulong.never@gmail.com
 @time: 2018/3/25 上午11:08
 """
+import json
 from tornado.web import RequestHandler
+
+from mokitou.utils.json_util import JsonEncoder
 
 
 class IndexHandler(RequestHandler):
@@ -220,9 +223,29 @@ class TranceHandler(RequestHandler):
     自动转义，防止恶意提交
     关闭自动转义
     """
+
     def data_received(self, chunk):
         pass
 
     def get(self, *args, **kwargs):
         s = '<h1>hello word</h1>'
         self.render('../templates/index.html', index=s)
+
+
+class ArticleHandler(RequestHandler):
+    def data_received(self, chunk):
+        pass
+
+    def get(self, *args, **kwargs):
+        sql = 'select * from article'
+        res = self.application.db.get_all(sql=sql)
+        print(res)
+        self.write(json.dumps(res, cls=JsonEncoder))
+
+    def put(self, *args, **kwargs):
+        name = self.get_query_argument('name')
+        content = self.get_query_argument('content')
+        sql = 'INSERT INTO article(article_name, article_content) VALUES("{}", "{}")'.format(name, content)
+        res = self.application.db.upsert_record(sql)
+        print(res)
+        self.write(res)

@@ -5,9 +5,12 @@
 """
 import os
 
-from mokitou.view import index
-from mokitou.config import config
 from tornado import web
+
+from mokitou.config import config
+from mokitou.config.config import mysql_master
+from mokitou.dao.mysql.mysql_template import MysqlTemplate
+from mokitou.view import index
 
 
 class APP(web.Application):
@@ -33,6 +36,7 @@ class APP(web.Application):
             (r'/profile', index.ProfileHandler),
             (r'/file', index.FileHandler),
             (r'/trans', index.TranceHandler),
+            (r'/article/list', index.ArticleHandler),
             (
                 r'/(.*)$', web.StaticFileHandler,
                 dict(
@@ -42,3 +46,4 @@ class APP(web.Application):
         ]
         # super().__init__(handlers=handlers, settings=config.settings)
         super().__init__(handlers, **config.settings)
+        self.db = MysqlTemplate(**mysql_master)

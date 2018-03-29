@@ -31,3 +31,11 @@ settings = {
 }
 
 # print(settings)
+
+mysql_master = {
+    'host': '192.168.91.129',
+    'port': 3306,
+    'user': 'root',
+    'password': '123456',
+    'db_name': 'tornado',
+}
