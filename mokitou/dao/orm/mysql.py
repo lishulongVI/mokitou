@@ -4,14 +4,21 @@
 @time: 2018/3/28 下午2:12
 """
 import pymysql
-from mokitou.config.config import mysql_master
 
 
+def singleton(cls, *args, **kwargs):
+    instance = {}
+
+    def __singleton():
+        if cls not in instance:
+            instance[cls] = cls(*args, **kwargs)
+        return instance[cls]
+
+    return __singleton
+
+
+@singleton
 class MysqlTemplate(object):
-    """
-    数据库模板
-    """
-
     def __init__(self, **kwargs):
         """
         初始化变量
@@ -32,12 +39,10 @@ class MysqlTemplate(object):
         self.db = pymysql.connect(
             host=self.host, user=self.user,
             passwd=self.password, db=self.db_name,
-            charset='utf8',
             cursorclass=pymysql.cursors.DictCursor
         )
         self.cursor = self.db.cursor()
-    #
-# (1366, "Incorrect string value: '\\xE5\\x86\\x85\\xE5\\xAE\\xB9' for column 'article_content' at row 1")
+
     def close(self):
         """
         关闭链接
@@ -113,7 +118,3 @@ class MysqlTemplate(object):
             self.db.rollback()
 
         return count
-
-    @staticmethod
-    def db():
-        return MysqlTemplate(**mysql_master)

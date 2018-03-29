@@ -6,6 +6,7 @@
 import json
 from tornado.web import RequestHandler
 
+from mokitou.dao.orm.ArticleDao import Article
 from mokitou.utils.json_util import JsonEncoder
 
 
@@ -236,6 +237,9 @@ class ArticleHandler(RequestHandler):
     def data_received(self, chunk):
         pass
 
+    def set_default_headers(self):
+        self.set_header('Content-type', 'application/json')
+
     def get(self, *args, **kwargs):
         sql = 'select * from article'
         res = self.application.db.get_all(sql=sql)
@@ -243,9 +247,13 @@ class ArticleHandler(RequestHandler):
         self.write(json.dumps(res, cls=JsonEncoder))
 
     def put(self, *args, **kwargs):
-        name = self.get_query_argument('name')
-        content = self.get_query_argument('content')
+        name = self.get_body_argument('name')
+        content = self.get_body_argument('content')
         sql = 'INSERT INTO article(article_name, article_content) VALUES("{}", "{}")'.format(name, content)
         res = self.application.db.upsert_record(sql)
         print(res)
-        self.write(res)
+        self.write(dict(result=res))
+
+    def patch(self, *args, **kwargs):
+        article = Article('llll', 'content')
+        self.write(dict(result=article.save_obj()))
