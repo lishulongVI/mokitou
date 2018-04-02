@@ -8,7 +8,7 @@ import asyncio
 
 async def async_demo():
     print('......')
-    res = await asyncio.sleep(10)
+    res = await hello()
     print(res)
     print('........')
 
@@ -19,6 +19,8 @@ def hello():
 
     r = yield from asyncio.sleep(10)
     print('end.....')
+
+    return "aa"
 
 
 # async_demo()
