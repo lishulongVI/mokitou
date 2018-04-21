@@ -37,10 +37,15 @@ def crawler_resolving_index_page(want_name='春天里', author_name=''):
         pass
 
     song_names = orig_songs.keys()
-    want_name = want_name + '.mp3'
-    for name in song_names:
-        if name.find(want_name) >= 0 and name.find(author_name) >= 0:
-            want_song[name] = orig_songs.get(name)
+    if song_kind == 1:
+        want_name = want_name + '.mp3'
+        for name in song_names:
+            if name.find(want_name) >= 0 and name.find(author_name) >= 0:
+                want_song[name] = orig_songs.get(name)
+    else:
+        for name in song_names:
+            if name.find(want_name) >= 0:
+                want_song[name] = orig_songs.get(name)
 
     return want_song
 
@@ -79,13 +84,17 @@ pool = ThreadPool(9)
 def loop_want_songs_and_down_load():
     target_file_path = os.path.join(base_path, 'want_song/songs.txt')
 
-    print(target_file_path)
-
     with open(target_file_path, 'r') as file:
         line = file.read()
         ll = line.split('\n')
         pool.map(down_load, ll)
 
+    pool.close()
+    pool.join()
+
+
+# song_kind == 1 ： 按照歌曲名字下载 以歌曲名.mp3 为后缀的 下载  0 按照 作家下载 或者按照歌曲名字的模糊匹配下载
+song_kind = 0
 
 if __name__ == "__main__":
     loop_want_songs_and_down_load()
